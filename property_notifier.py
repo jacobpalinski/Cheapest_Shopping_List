@@ -22,7 +22,6 @@ class User:
         self.max_price=None # maximum of price range for home buyer/investor and rental range for renter
     
     def prompt(self):
-        num_suburbs=int(input('How many suburbs are you interested in? '))
         suburbs=(input(f'Please enter the {num_suburbs} you are interested in: ').lower().title().replace('And',',').split(','))
         states=(input('Please enter the state of each suburb (NSW,VIC,ACT,WA,NT,TAS,QLD,SA): ').upper().replace(' ',',').replace('And,','').split(','))
         suburb_state=list(zip(suburbs,states)) # suburb,state combination as state is mandatory in listings_search call

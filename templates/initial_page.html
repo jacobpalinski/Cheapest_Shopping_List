@@ -1,0 +1,37 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Domain Property Notifier{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='home-icon.png') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='home-icon.png') }}" type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url('static/property_background.jpg');
+        background-size: 1280px 600px;
+    }
+    h1 { font: 42px Times New Roman, serif;
+        font-weight: bold; 
+        text-align: center;}
+    p { font: 16px Times New Roman, serif;
+        text-align: center;}
+    form {font: 16px Times New Roman, serif;
+        text-align: center;}
+    option {font: 16px Times New Roman, serif;
+    text-align:center}
+</style> 
+<div class="container">
+    {% block page_content %}
+    <h1> Domain Property Notifier</h1>
+    <p>Generate email notifications for the properties you want to rent, own or invest in. Your email body will contain 
+    property information based on intended purpose and criterea provided, including a CSV file for download.
+    Select appropriate option from the question below and click next to get started. 
+    </p>
+    {{ wtf.quick_form(form) }} 
+    {% endblock %}
+</div>
+{% endblock %}
