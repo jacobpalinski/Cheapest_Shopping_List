@@ -1,1 +1,25 @@
+{% extends "base.html" %}
 
+{% block title %}Owner Occupier Information{% endblock %}
+
+{% block content %}
+    {% block page_content %}
+    {{ super() }}
+    <h1>Owner Occupier Property Information Form</h1>
+    <p>Fill out the below form and a CSV containing Listing Date, Property Address, Property Type, Suburb, State, Postcode, Price,
+    Land Area (if applicable), URL, Mortgage Repayments and 10yr Appreciation will be sent to your email address.</p>
+    <p><b><u>Valid Loan Terms</u></b></p>
+    <ul>
+    <p><b>Fixed Rate Loan</b>: 1-5 years</p>
+    <p><b>Variable Rate Loan Interest Only</b>: 5-10 years</p>
+    <p><b>Variable Rate Loan Principal and Interest</b>: 10,15,20,25 or 30 years</p>
+    </ul>
+    <style>
+        ul{
+            text-align:center;
+        }
+    </style>
+    <br>
+    {{ wtf.quick_form(form, novalidate=True) }}
+    {% endblock %}
+{% endblock %}

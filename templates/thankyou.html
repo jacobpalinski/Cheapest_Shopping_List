@@ -1,1 +1,11 @@
+{% extends "base.html" %}
 
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+    {% block page_content %}
+    {{ super() }}
+    <h1>Thank You For Using The Service</h1>
+    <p>You should have received an email. Check your inbox</p>
+    {% endblock %}
+{% endblock %}

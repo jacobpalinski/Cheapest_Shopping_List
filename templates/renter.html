@@ -1,1 +1,14 @@
+{% extends "base.html" %}
 
+{% block title %}Renter Information{% endblock %}
+
+{% block content %}
+    {% block page_content %}
+    {{ super() }}
+    <h1>Rental Property Information Form</h1>
+    <p>Fill out the below form and a CSV containing Listing Date, Property Type, Suburb, State, Postcode,
+    Property Address, Weekly Rent, Annual Rent, Land Area (if applicable) and URL will be sent to your email address.</p>
+    <br>
+    {{ wtf.quick_form(form, novalidate=True) }}
+    {% endblock %}
+{% endblock %}

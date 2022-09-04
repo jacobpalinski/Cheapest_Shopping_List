@@ -1,0 +1,62 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='housing-icon-9.jpg') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='housing-icon-9.jpg') }}" type="image/x-icon">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% block page_content %}
+    {% for message in get_flashed_messages() %}
+    <div class="alert no results">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    <style>
+        h1 {
+            font: 42px Times New Roman, serif;
+            font-weight: bold; 
+            text-align: center;
+        }
+        p { font: 16px Times New Roman, serif;
+            text-align: center;}
+        body {
+            background: url('static/green-domain-background.jpg') no-repeat center fixed;
+            background-size: cover;
+        }
+        form {
+            height: 100px;
+            width: 500px;
+            font: 16px Times New Roman, serif;
+            margin: auto;
+        }
+        label {
+            display: block;
+            text-align: center;
+        }
+        .form-control {
+            font-size: 16px;
+            width: 500px;
+        }
+        .btn {
+            display: block;
+            margin: auto;
+        }
+        div.alert.no.results{
+            font: 16px Times New Roman, serif;
+            text-align: center;
+            background-color: antiquewhite;
+        }
+        .alert{
+            border: 1px solid black;
+        }
+    </style> 
+    {% endblock %}
+</div>
+{% endblock %}
+
