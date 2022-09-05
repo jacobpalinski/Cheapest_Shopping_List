@@ -16,7 +16,7 @@ investor_rate_information={('fixed','=<3'):4.00,('fixed','>3'):4.73,('variable-P
 ('variable-PI','>80'):3.72,('variable-IO','=<80'):3.63,('variable-IO','>80'):3.93}
 
 #Suburb and state data from census to validate suburb exists
-reader=csv.DictReader(open(r'C:\Users\kpali\Documents\Python_Projects\Property_Notifier\australian_suburbs.csv'))
+reader=csv.DictReader(open(r'australian_suburbs.csv'))
 suburb_state_dict={rows['suburb']:rows['state'] for rows in reader if rows['suburb']!='' if rows['state']!=''}
 
 #Used to store all relevant property information extracted
