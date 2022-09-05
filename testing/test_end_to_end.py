@@ -1,6 +1,6 @@
 import pytest
 import pytest_mock
-from flask_app import app
+from application import app
 from flask import request
 from property_notifier import *
 from decimal import Decimal
