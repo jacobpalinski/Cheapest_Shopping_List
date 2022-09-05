@@ -8,7 +8,8 @@ from wtforms import SelectField,SubmitField,StringField,SelectMultipleField, Dat
 from wtforms.validators import InputRequired, DataRequired, NumberRange, Email
 import regex as re
 
-app=Flask(__name__)
+application=Flask(__name__)
+app=application
 bootstrap=Bootstrap(app)
 app.config['SECRET_KEY']='X10FRET14'
 
