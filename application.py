@@ -1,5 +1,5 @@
 from decimal import ROUND_DOWN
-from flask import Flask, render_template, session, redirect,request, flash
+from flask import Flask, render_template, session, redirect,request, flash, url_for
 from flask_bootstrap import Bootstrap
 from property_notifier import *
 from custom_validators import *
@@ -9,9 +9,8 @@ from wtforms.validators import InputRequired, DataRequired, NumberRange, Email
 import regex as re
 
 application=Flask(__name__)
-app=application
-bootstrap=Bootstrap(app)
-app.config['SECRET_KEY']='X10FRET14'
+bootstrap=Bootstrap(application)
+application.config['SECRET_KEY']='X10FRET14'
 
 class InitialForm(FlaskForm):
     user_type=SelectField('What brings you here today?',choices=[('Renter','I am looking for properties to rent'),
@@ -59,7 +58,11 @@ class OwnerOccupierForm(InvestorForm):
 
 RenterForm.next=SubmitField('Submit')
 
-@app.route('/initial_page',methods=['GET','POST'])
+@application.route('/')
+def default():
+    return redirect(url_for('initial_page'))
+
+@application.route('/initial_page',methods=['GET','POST'])
 def initial_page():
     initial_form=InitialForm()
     if request.method == 'POST':
@@ -75,7 +78,7 @@ def initial_page():
     
     return render_template('initial_page.html',form=initial_form)
 
-@app.route('/renter',methods=['GET','POST'])
+@application.route('/renter',methods=['GET','POST'])
 def renter():
     renter=Renter()
     customer_email=Customer_Email(session.get('email'),session.get('password'))
@@ -111,7 +114,7 @@ def renter():
     
     return render_template('renter.html',form=renter_form)
 
-@app.route('/investor',methods=['GET','POST'])
+@application.route('/investor',methods=['GET','POST'])
 def investor():
     investor=Investor()
     customer_email=Customer_Email(session.get('email'),session.get('password'))
@@ -165,7 +168,7 @@ def investor():
                 
     return render_template('investor.html',form=investor_form)
 
-@app.route('/owner_occupier',methods=['GET','POST'])
+@application.route('/owner_occupier',methods=['GET','POST'])
 def owner_occupier():
     owner_occupier=Owner_Occupier()
     customer_email=Customer_Email(session.get('email'),session.get('password'))
@@ -218,6 +221,9 @@ def owner_occupier():
             return redirect('/thankyou')
     return render_template('owner_occupier.html',form=owner_occupier_form)
 
-@app.route('/thankyou',methods=['GET'])
+@application.route('/thankyou',methods=['GET'])
 def thankyou():
     return render_template('thankyou.html')
+
+if __name__=="__main__":
+    application.run(port=5000)
