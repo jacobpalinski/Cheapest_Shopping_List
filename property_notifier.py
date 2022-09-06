@@ -302,7 +302,7 @@ class Customer_Email:
         message['To']=self.email_address
         suburb_set={suburb for location in user_type.locations for suburb in location.keys()}
         suburb_string=','.join(suburb_set)
-        message['Subject']=f'Investment Properties in {suburb_string} last updated {user_type.date_posted}'
+        message['Subject']=f'{"Investment Properties" if isinstance(user_type,Investor()) else "Properties for Sale"} in {suburb_string} last updated {user_type.date_posted}'
         body= f'{user_type.bedrooms} bedroom, {user_type.bathrooms} bathroom, {user_type.car_spaces} car space {", ".join("Apartments" if property_type=="ApartmentUnitFlat" else property_type + "s" for property_type in user_type.property_types).lower()} in {", ".join({suburb for location in user_type.locations for suburb in location.keys()})}, priced between ${user_type.min_price} and ${user_type.max_price}, earliest posting date {user_type.date_posted}. Key metrics calculated for {user_type.loan_type.lower()} rate {user_type.variable_loan_type.lower() if user_type.variable_loan_type!="None" else ""} loan with an LVR of {user_type.lvr} for {user_type.loan_term} years with {user_type.mortgage_interest}% interest p.a.'
         message.attach(MIMEText(body,"plain"))
         message.attach(MIMEApplication(self.property_data_io.getvalue(),Name='property_data.csv'))
