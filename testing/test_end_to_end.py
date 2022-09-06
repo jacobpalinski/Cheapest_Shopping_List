@@ -21,7 +21,7 @@ def driver():
     driver.close()
     driver.quit()
 
-@pytest.fixture(params=[('kpalinski99@gmail.com','cizsvspsvitlsiuv'),('jacob.palinski@outlook.com','Workjob91$')])
+@pytest.fixture(params=[('kpalinski99@gmail.com','*'),('jacob.palinski@outlook.com','*')])
 def driver_initial_page_renter(driver,request):
     driver.get('http://127.0.0.1:5000/initial_page')
     user_type=Select(driver.find_element(By.XPATH,'//*[@id="user_type"]'))
@@ -98,8 +98,8 @@ class Test_End_To_End_Renter:
         driver=driver_renter_page_flash_message
         assert '<div class="alert no results">' in driver.page_source
 
-@pytest.fixture(params=[('Investor','kpalinski99@gmail.com','cizsvspsvitlsiuv'),('Investor','jacob.palinski@outlook.com','Workjob91$'),
-('Owner Occupier','kpalinski99@gmail.com','cizsvspsvitlsiuv'), ('Owner Occupier','jacob.palinski@outlook.com','Workjob91$')])
+@pytest.fixture(params=[('Investor','kpalinski99@gmail.com','*'),('Investor','jacob.palinski@outlook.com','*'),
+('Owner Occupier','kpalinski99@gmail.com','*'), ('Owner Occupier','jacob.palinski@outlook.com','*')])
 def driver_initial_page_investor_and_owner_occupier(driver,request):
     driver.get('http://127.0.0.1:5000/initial_page')
     user_type=Select(driver.find_element(By.XPATH,'//*[@id="user_type"]'))

@@ -1,6 +1,6 @@
 import pytest
 import pytest_mock
-from application import app
+from application import application
 from flask import request
 from property_notifier import *
 import datetime
@@ -8,9 +8,9 @@ from decimal import Decimal
 
 @pytest.fixture
 def client():
-    app.config['TESTING']=True
-    app.config['WTF_CSRF_ENABLED']=False
-    return app.test_client()
+    application.config['TESTING']=True
+    application.config['WTF_CSRF_ENABLED']=False
+    return application.test_client()
 
 class Test_Initial_Page:
     
@@ -35,29 +35,29 @@ class Test_Initial_Page:
     
     def test_initial_page_post_user_type_Renter_gmail_wrong_password(self,client):
         resp=client.post('/initial_page',data={'user_type':'Renter','email':'kpalinski99@gmail.com',
-        'password':'wrongpassword'})
+        'password':'*'})
         assert resp.status_code==200
     
     def test_initial_page_post_user_type_Renter_outlook_account_password(self,client):
         resp=client.post('/initial_page',data={'user_type':'Renter','email':'jacob.palinski@outlook.com',
-        'password':'Workjob91$'})
+        'password':'*'})
         assert resp.status_code==302
         assert b'href="/renter"' in resp.data
     
     def test_initial_page_post_user_type_Renter_outlook_wrong_password(self,client):
         resp=client.post('/initial_page',data={'user_type':'Renter','email':'jacob.palinski@outlook.com',
-        'password':'wrongpassword'})
+        'password':'*'})
         assert resp.status_code==200
 
     def test_initial_page_post_user_type_Owner_Occupier_outlook_account_password(self,client):
         resp=client.post('/initial_page',data={'user_type':'Owner Occupier','email':'jacob.palinski@outlook.com',
-        'password':'Workjob91$'})
+        'password':'*'})
         assert resp.status_code == 302
         assert b'href="/owner_occupier"' in resp.data
 
     def test_initial_page_post_user_type_Investor_outlook_account_password(self,client):
         resp=client.post('/initial_page',data={'user_type':'Investor','email':'jacob.palinski@outlook.com',
-        'password':'Workjob91$'})
+        'password':'*'})
         assert resp.status_code == 302
         assert b'href="/investor"' in resp.data
 
