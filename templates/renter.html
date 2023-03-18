@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-
 {% block title %}Renter Information{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
 
 {% block content %}
     {% block page_content %}

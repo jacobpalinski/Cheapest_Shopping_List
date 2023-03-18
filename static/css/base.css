@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'Rokkitt';
+    src: url('../fonts/Rokkitt-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Hattori Hanzo';
+    src: url('../fonts/Hattori_Hanzo.otf');
+}
+
+h1 {
+    font: 48px 'Rokkitt', sans-serif;
+    font-weight: bold; 
+    text-align: center;
+}
+p { font: 18px 'Hattori Hanzo', sans-serif;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;}
+body {
+    background: url('../images/domain-background.jpg') no-repeat center fixed;
+    background-size: cover;
+}
+form {
+    height: 100px;
+    width: 500px;
+    font: 18px 'Hattori Hanzo', sans-serif;
+    margin: auto;
+}
+label {
+    display: block;
+    text-align: center;
+}
+.form-control {
+    font-size: 16px;
+    width: 500px;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+}
+.btn {
+    display: block;
+    margin: auto;
+    font-size: 16px;
+    width: 100px;
+    background-color: black;
+    color: white;
+}
+.btn:hover {
+    background-color: #57bd12;
+    color: white;
+}
+div.alert.no.results{
+    font: 16px 'Inter', sans-serif;
+    text-align: center;
+    background-color: antiquewhite;
+}
+.alert{
+    border: 1px solid black;
+}

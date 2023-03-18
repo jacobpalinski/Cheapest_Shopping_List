@@ -29,7 +29,7 @@ packaging==21.3
 pathspec==0.9.0
 pluggy==1.0.0
 py==1.11.0
-py3-validate-email==1.0.7
+py3-validate-email==1.0.5
 pycparser==2.21
 pyparsing==3.0.9
 PySocks==1.7.1

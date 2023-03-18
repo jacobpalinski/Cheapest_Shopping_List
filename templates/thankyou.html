@@ -2,10 +2,15 @@
 
 {% block title %}Thank You{% endblock %}
 
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/thankyou.css') }}">
+{% endblock %}
+
 {% block content %}
     {% block page_content %}
     {{ super() }}
-    <h1>Thank You For Using The Service</h1>
+    <h1>Thank You For Using The Service!</h1>
     <p>You should have received an email. Check your inbox</p>
     {% endblock %}
 {% endblock %}

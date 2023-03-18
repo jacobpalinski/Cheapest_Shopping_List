@@ -2,12 +2,18 @@
 
 {% block title %}Owner Occupier Information{% endblock %}
 
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+
 {% block content %}
     {% block page_content %}
     {{ super() }}
     <h1>Owner Occupier Property Information Form</h1>
     <p>Fill out the below form and a CSV containing Listing Date, Property Address, Property Type, Suburb, State, Postcode, Price,
     Land Area (if applicable), URL, Mortgage Repayments and 10yr Appreciation will be sent to your email address.</p>
+    <br>
     <p><b><u>Valid Loan Terms</u></b></p>
     <ul>
     <p><b>Fixed Rate Loan</b>: 1-5 years</p>

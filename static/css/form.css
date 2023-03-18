@@ -1,0 +1,8 @@
+body {
+    background: url('../images/yellow-green-memphis.jpg') no-repeat center fixed;
+    background-size: cover;
+}
+.btn:hover {
+    background-color: #4eca98;
+    color: white;
+}
