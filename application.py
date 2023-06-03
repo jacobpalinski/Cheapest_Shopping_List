@@ -1,3 +1,4 @@
+import regex as re
 from decimal import ROUND_DOWN
 from flask import Flask, render_template, session, redirect,request, flash, url_for
 from flask_bootstrap import Bootstrap
@@ -6,7 +7,6 @@ from custom_validators import *
 from flask_wtf import FlaskForm
 from wtforms import SelectField,SubmitField,StringField,SelectMultipleField, DateField, DecimalField, EmailField, PasswordField
 from wtforms.validators import InputRequired, DataRequired, NumberRange, Email
-import regex as re
 
 application=Flask(__name__,static_folder = 'static')
 bootstrap=Bootstrap(application)
@@ -25,8 +25,8 @@ class RenterForm(FlaskForm):
     suburbs=StringField('What suburbs are you interested in?',validators=[InputRequired('Please input suburbs'),
     suburb_validation])
     property_types=SelectMultipleField('What kinds of properties are you interested in? Select all that apply',
-    choices=[('House','House'),('ApartmentUnitFlat','Apartment'),('Townhouse','Townhouse')],validators=
-    [DataRequired('Please select at least one option')])
+    choices=[('House','House'),('ApartmentUnitFlat','Apartment'),('Townhouse','Townhouse')],
+    validators=[DataRequired('Please select at least one option')])
     bedrooms=SelectField('How many bedrooms?',choices=[(1,1),(2,2),(3,3),(4,4),(5,5)],validators= 
     [DataRequired('Please select an option')])
     bathrooms=SelectField('How many bathrooms?',choices=[(1,1),(2,2),(3,3),(4,4),(5,5)],validators= 
