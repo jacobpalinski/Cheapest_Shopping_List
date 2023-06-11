@@ -13,6 +13,11 @@
     <p>Fill out the below form and a CSV containing Listing Date, Property Type, Suburb, State, Postcode,
     Property Address, Weekly Rent, Annual Rent, Land Area (if applicable) and URL will be sent to your email address.</p>
     <br>
+    <p><b><u>Entering Suburbs</u></b></p>
+    <p>When entering suburbs, enter in the format (Suburb,State,Postcode) with no whitespaces between commas inside brackets
+    and seperating each (Suburb,State,Postcode) with comma. Example Input: (Hurstville,NSW,2220),(Penshurst,NSW,2222)
+    </p>
+    <br>
     {{ wtf.quick_form(form, novalidate=True) }}
     {% endblock %}
 {% endblock %}

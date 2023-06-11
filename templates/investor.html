@@ -15,17 +15,17 @@
     Land Area (if applicable), URL, Mortgage Repayments, Rental Income, Operating Expenses, Cash Flow, Cash on Cash Return,
     1yr Appreciation, 5yr Appreciation and 10yr Appreciation will be sent to your email address.</p>
     <br>
+    <p><b><u>Entering Suburbs</u></b></p>
+    <p>When entering suburbs, enter in the format (Suburb,State,Postcode) with no whitespaces between commas inside brackets
+    and seperating each (Suburb,State,Postcode) with comma. Example Input: (Hurstville,NSW,2220),(Penshurst,NSW,2222)
+    </p>
+    <br>
     <p><b><u>Valid Loan Terms</u></b></p>
     <ul>
     <p><b>Fixed Rate Loan</b>: 1-5 years</p>
     <p><b>Variable Rate Loan Interest Only</b>: 5-10 years</p>
     <p><b>Variable Rate Loan Principal and Interest</b>: 10,15,20,25 or 30 years</p>
     </ul>
-    <style>
-        ul{
-            text-align:center;
-        }
-    </style>
     <br>
     {{ wtf.quick_form(form, novalidate=True) }}
     {% endblock %}

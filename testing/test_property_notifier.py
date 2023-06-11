@@ -501,7 +501,7 @@ def owner_occupier_fixed_rate_principal_and_interest():
     return owner_occupier
 
 @pytest.fixture
-def metrics_calculation_api_calls_house_investor_variable_rate_principal_and_interest(investor, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_house_investor_variable_rate_principal_and_interest(investor, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'House':
         pytest.skip('Metrics calculation for house only')
     residential_listings_search = ResidentialListingsSearch(investor, api_client)
@@ -510,11 +510,10 @@ def metrics_calculation_api_calls_house_investor_variable_rate_principal_and_int
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(investor, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('House','Hurstville','NSW','2220')] = [10, 50, 80, 800]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_house_investor_variable_rate_interest_only(investor_variable_rate_interest_only, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_house_investor_variable_rate_interest_only(investor_variable_rate_interest_only, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'House':
         pytest.skip('Metrics calculation for house only')
     residential_listings_search = ResidentialListingsSearch(investor_variable_rate_interest_only, api_client)
@@ -523,11 +522,10 @@ def metrics_calculation_api_calls_house_investor_variable_rate_interest_only(inv
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(investor_variable_rate_interest_only, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('House','Hurstville','NSW','2220')] = [10, 50, 80, 800]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_house_investor_fixed_rate_principal_and_interest(investor_fixed_rate_principal_and_interest, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_house_investor_fixed_rate_principal_and_interest(investor_fixed_rate_principal_and_interest, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'House':
         pytest.skip('Metrics calculation for house only')
     residential_listings_search = ResidentialListingsSearch(investor_fixed_rate_principal_and_interest, api_client)
@@ -536,11 +534,10 @@ def metrics_calculation_api_calls_house_investor_fixed_rate_principal_and_intere
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(investor_fixed_rate_principal_and_interest, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('House','Hurstville','NSW','2220')] = [10, 50, 80, 800]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_apartment_investor_variable_rate_principal_and_interest(investor, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_apartment_investor_variable_rate_principal_and_interest(investor, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'Apartment':
         pytest.skip('Metrics calculation for apartment only')
     residential_listings_search = ResidentialListingsSearch(investor, api_client)
@@ -549,11 +546,9 @@ def metrics_calculation_api_calls_apartment_investor_variable_rate_principal_and
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(investor, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('Apartment','Hurstville','NSW','2220')] = [5, 10, 60, 750]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
-
+    return suburb_performance_statistics
 @pytest.fixture
-def metrics_calculation_api_calls_apartment_investor_variable_rate_interest_only(investor_variable_rate_interest_only, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_apartment_investor_variable_rate_interest_only(investor_variable_rate_interest_only, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'Apartment':
         pytest.skip('Metrics calculation for apartment only')
     residential_listings_search = ResidentialListingsSearch(investor_variable_rate_interest_only, api_client)
@@ -562,11 +557,10 @@ def metrics_calculation_api_calls_apartment_investor_variable_rate_interest_only
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(investor_variable_rate_interest_only, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('Apartment','Hurstville','NSW','2220')] = [5, 10, 60, 750]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_apartment_investor_fixed_rate_principal_and_interest(investor_fixed_rate_principal_and_interest, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_apartment_investor_fixed_rate_principal_and_interest(investor_fixed_rate_principal_and_interest, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'Apartment':
         pytest.skip('Metrics calculation for apartment only')
     residential_listings_search = ResidentialListingsSearch(investor_fixed_rate_principal_and_interest, api_client)
@@ -575,11 +569,10 @@ def metrics_calculation_api_calls_apartment_investor_fixed_rate_principal_and_in
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(investor_fixed_rate_principal_and_interest, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('Apartment','Hurstville','NSW','2220')] = [5, 10, 60, 750]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_house_owner_occupier_variable_rate_principal_and_interest(owner_occupier, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_house_owner_occupier_variable_rate_principal_and_interest(owner_occupier, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'House':
         pytest.skip('Metrics calculation for house only')
     residential_listings_search = ResidentialListingsSearch(owner_occupier, api_client)
@@ -588,11 +581,10 @@ def metrics_calculation_api_calls_house_owner_occupier_variable_rate_principal_a
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(owner_occupier, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('House','Hurstville','NSW','2220')] = [10, 50, 80, 800]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_house_owner_occupier_variable_rate_interest_only(owner_occupier_variable_rate_interest_only, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_house_owner_occupier_variable_rate_interest_only(owner_occupier_variable_rate_interest_only, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'House':
         pytest.skip('Metrics calculation for house only')
     residential_listings_search = ResidentialListingsSearch(owner_occupier_variable_rate_interest_only, api_client)
@@ -601,11 +593,10 @@ def metrics_calculation_api_calls_house_owner_occupier_variable_rate_interest_on
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(owner_occupier_variable_rate_interest_only, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('House','Hurstville','NSW','2220')] = [10, 50, 80, 800]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_house_owner_occupier_fixed_rate_principal_and_interest(owner_occupier_fixed_rate_principal_and_interest, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_house_owner_occupier_fixed_rate_principal_and_interest(owner_occupier_fixed_rate_principal_and_interest, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'House':
         pytest.skip('Metrics calculation for house only')
     residential_listings_search = ResidentialListingsSearch(owner_occupier_fixed_rate_principal_and_interest, api_client)
@@ -614,11 +605,10 @@ def metrics_calculation_api_calls_house_owner_occupier_fixed_rate_principal_and_
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(owner_occupier_fixed_rate_principal_and_interest, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('House','Hurstville','NSW','2220')] = [10, 50, 80, 800]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_apartment_owner_occupier_variable_rate_principal_and_interest(owner_occupier, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_apartment_owner_occupier_variable_rate_principal_and_interest(owner_occupier, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'Apartment':
         pytest.skip('Metrics calculation for apartment only')
     residential_listings_search = ResidentialListingsSearch(owner_occupier, api_client)
@@ -627,11 +617,10 @@ def metrics_calculation_api_calls_apartment_owner_occupier_variable_rate_princip
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(owner_occupier, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('Apartment','Hurstville','NSW','2220')] = [5, 10, 60, 750]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_apartment_owner_occupier_variable_rate_interest_only(owner_occupier_variable_rate_interest_only, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_apartment_owner_occupier_variable_rate_interest_only(owner_occupier_variable_rate_interest_only, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'Apartment':
         pytest.skip('Metrics calculation for apartment only')
     residential_listings_search = ResidentialListingsSearch(owner_occupier_variable_rate_interest_only, api_client)
@@ -640,11 +629,10 @@ def metrics_calculation_api_calls_apartment_owner_occupier_variable_rate_interes
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(owner_occupier_variable_rate_interest_only, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('Apartment','Hurstville','NSW','2220')] = [5, 10, 60, 750]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 @pytest.fixture
-def metrics_calculation_api_calls_apartment_owner_occupier_fixed_rate_principal_and_interest(owner_occupier_fixed_rate_principal_and_interest, api_client, residential_listings_response):
+def suburb_performance_statistics_api_calls_apartment_owner_occupier_fixed_rate_principal_and_interest(owner_occupier_fixed_rate_principal_and_interest, api_client, residential_listings_response):
     if residential_listings_response[0]['listing']['propertyDetails']['propertyType'] != 'Apartment':
         pytest.skip('Metrics calculation for apartment only')
     residential_listings_search = ResidentialListingsSearch(owner_occupier_fixed_rate_principal_and_interest, api_client)
@@ -653,104 +641,103 @@ def metrics_calculation_api_calls_apartment_owner_occupier_fixed_rate_principal_
     property_data.common_listings_data()
     suburb_performance_statistics = SuburbPerformanceStatistics(owner_occupier_fixed_rate_principal_and_interest, api_client, property_data)
     suburb_performance_statistics.api_calls_made[('Apartment','Hurstville','NSW','2220')] = [5, 10, 60, 750]
-    metrics_calculation = MetricsCalculation(suburb_performance_statistics)
-    return metrics_calculation
+    return suburb_performance_statistics
 
 class TestMetricsCalculation:
-    @pytest.mark.parametrize("metrics_calculation", [
-        pytest.lazy_fixture('metrics_calculation_api_calls_house_investor_variable_rate_principal_and_interest'),
-        pytest.lazy_fixture('metrics_calculation_api_calls_house_investor_variable_rate_interest_only'),
-        pytest.lazy_fixture('metrics_calculation_api_calls_house_investor_fixed_rate_principal_and_interest')
+    @pytest.mark.parametrize("suburb_performance_statistics", [
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_house_investor_variable_rate_principal_and_interest'),
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_house_investor_variable_rate_interest_only'),
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_house_investor_fixed_rate_principal_and_interest')
     ])
-    def test_calculate_investor_metrics_house(self, metrics_calculation):
-        metrics_calculation.calculate_investor_metrics(0, 'House')
-        if metrics_calculation.user.loan_type == 'Variable' and metrics_calculation.user.variable_loan_type == 'Principal and Interest':
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'House', 'Suburb': 'Hurstville', 'State': 'NSW',
+    def test_calculate_investor_metrics_house(self, suburb_performance_statistics):
+        suburb_performance_statistics.calculate_investor_metrics(0, 'House')
+        if suburb_performance_statistics.user.loan_type == 'Variable' and suburb_performance_statistics.user.variable_loan_type == 'Principal and Interest':
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'House', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 5.63, 
         'Rental Income' : 3476.19, 'Operating Expenses': 1738.10, 'Cash Flow': 1732.46, 'Cash on Cash Return': 145.38, '1yr Appreciation': 
         10, '5yr Appreciation': 50, '10yr Appreciation': 80}
-        elif metrics_calculation.user.loan_type == 'Variable' and metrics_calculation.user.variable_loan_type == 'Interest Only':
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'House', 'Suburb': 'Hurstville', 'State': 'NSW',
+        elif suburb_performance_statistics.user.loan_type == 'Variable' and suburb_performance_statistics.user.variable_loan_type == 'Interest Only':
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'House', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 1.73, 
         'Rental Income' : 3476.19, 'Operating Expenses': 1738.10, 'Cash Flow': 1736.36, 'Cash on Cash Return': 145.71, '1yr Appreciation': 
         10, '5yr Appreciation': 50, '10yr Appreciation': 80}
         else:
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'House', 'Suburb': 'Hurstville', 'State': 'NSW',
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'House', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 24.84, 
         'Rental Income' : 3476.19, 'Operating Expenses': 1738.10, 'Cash Flow': 1713.25, 'Cash on Cash Return': 143.77, '1yr Appreciation': 
         10, '5yr Appreciation': 50, '10yr Appreciation': 80}
     
-    @pytest.mark.parametrize("metrics_calculation", [
-        pytest.lazy_fixture('metrics_calculation_api_calls_apartment_investor_variable_rate_principal_and_interest'),
-        pytest.lazy_fixture('metrics_calculation_api_calls_apartment_investor_variable_rate_interest_only'),
-        pytest.lazy_fixture('metrics_calculation_api_calls_apartment_investor_fixed_rate_principal_and_interest')
+    @pytest.mark.parametrize("suburb_performance_statistics", [
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_apartment_investor_variable_rate_principal_and_interest'),
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_apartment_investor_variable_rate_interest_only'),
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_apartment_investor_fixed_rate_principal_and_interest')
     ])
-    def test_calculate_investor_metrics_apartment(self, metrics_calculation):
-        metrics_calculation.calculate_investor_metrics(0, 'Apartment')
-        if metrics_calculation.user.loan_type == 'Variable' and metrics_calculation.user.variable_loan_type == 'Principal and Interest':
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
+    def test_calculate_investor_metrics_apartment(self, suburb_performance_statistics):
+        suburb_performance_statistics.calculate_investor_metrics(0, 'Apartment')
+        if suburb_performance_statistics.user.loan_type == 'Variable' and suburb_performance_statistics.user.variable_loan_type == 'Principal and Interest':
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 5.63, 
         'Rental Income' : 3258.93, 'Operating Expenses': 1629.46, 'Cash Flow': 1623.84, 'Cash on Cash Return': 136.27, '1yr Appreciation': 
         5, '5yr Appreciation': 10, '10yr Appreciation': 60}
-        elif metrics_calculation.user.loan_type == 'Variable' and metrics_calculation.user.variable_loan_type == 'Interest Only':
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
+        elif suburb_performance_statistics.user.loan_type == 'Variable' and suburb_performance_statistics.user.variable_loan_type == 'Interest Only':
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 1.73, 
         'Rental Income' : 3258.93, 'Operating Expenses': 1629.46, 'Cash Flow': 1627.74, 'Cash on Cash Return': 136.59, '1yr Appreciation': 
         5, '5yr Appreciation': 10, '10yr Appreciation': 60}
         else:
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 24.84, 
         'Rental Income' : 3258.93, 'Operating Expenses': 1629.46, 'Cash Flow': 1604.63, 'Cash on Cash Return': 134.65, '1yr Appreciation': 
         5, '5yr Appreciation': 10, '10yr Appreciation': 60}
     
-    @pytest.mark.parametrize("metrics_calculation", [
-        pytest.lazy_fixture('metrics_calculation_api_calls_house_owner_occupier_variable_rate_principal_and_interest'),
-        pytest.lazy_fixture('metrics_calculation_api_calls_house_owner_occupier_variable_rate_interest_only'),
-        pytest.lazy_fixture('metrics_calculation_api_calls_house_owner_occupier_fixed_rate_principal_and_interest')
+    @pytest.mark.parametrize("suburb_performance_statistics", [
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_house_owner_occupier_variable_rate_principal_and_interest'),
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_house_owner_occupier_variable_rate_principal_and_interest'),
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_house_owner_occupier_variable_rate_principal_and_interest')
     ])
-    def test_calculate_owner_occupier_metrics_house(self, metrics_calculation):
-        metrics_calculation.calculate_owner_occupier_metrics(0, 'House')
-        if metrics_calculation.user.loan_type == 'Variable' and metrics_calculation.user.variable_loan_type == 'Principal and Interest':
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'House', 'Suburb': 'Hurstville', 'State': 'NSW',
+    def test_calculate_owner_occupier_metrics_house(self, suburb_performance_statistics):
+        suburb_performance_statistics.calculate_owner_occupier_metrics(0, 'House')
+        if suburb_performance_statistics.user.loan_type == 'Variable' and suburb_performance_statistics.user.variable_loan_type == 'Principal and Interest':
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'House', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 5.54, 
         '10yr Appreciation': 80}
-        elif metrics_calculation.user.loan_type == 'Variable' and metrics_calculation.user.variable_loan_type == 'Interest Only':
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05','Property Type': 'House', 'Suburb': 'Hurstville','State': 'NSW',
+        elif suburb_performance_statistics.user.loan_type == 'Variable' and suburb_performance_statistics.user.variable_loan_type == 'Interest Only':
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05','Property Type': 'House', 'Suburb': 'Hurstville','State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 1.82,  
         '10yr Appreciation': 80}
         else:
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05','Property Type': 'House', 'Suburb': 'Hurstville','State': 'NSW',
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05','Property Type': 'House', 'Suburb': 'Hurstville','State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 24.76, 
         '10yr Appreciation': 80}
     
-    @pytest.mark.parametrize("metrics_calculation", [
-        pytest.lazy_fixture('metrics_calculation_api_calls_apartment_owner_occupier_variable_rate_principal_and_interest'),
-        pytest.lazy_fixture('metrics_calculation_api_calls_apartment_owner_occupier_variable_rate_interest_only'),
-        pytest.lazy_fixture('metrics_calculation_api_calls_apartment_owner_occupier_fixed_rate_principal_and_interest')
+    @pytest.mark.parametrize("suburb_performance_statistics", [
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_apartment_owner_occupier_variable_rate_principal_and_interest'),
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_apartment_owner_occupier_variable_rate_interest_only'),
+        pytest.lazy_fixture('suburb_performance_statistics_api_calls_apartment_owner_occupier_fixed_rate_principal_and_interest')
     ])
-    def test_calculate_owner_occupier_metrics_apartment(self, metrics_calculation):
-        metrics_calculation.calculate_owner_occupier_metrics(0, 'Apartment')
-        if metrics_calculation.user.loan_type == 'Variable' and metrics_calculation.user.variable_loan_type == 'Principal and Interest':
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
+    def test_calculate_owner_occupier_metrics_apartment(self, suburb_performance_statistics):
+        suburb_performance_statistics.calculate_owner_occupier_metrics(0, 'Apartment')
+        if suburb_performance_statistics.user.loan_type == 'Variable' and suburb_performance_statistics.user.variable_loan_type == 'Principal and Interest':
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 5.54, 
         '10yr Appreciation': 60}
-        elif metrics_calculation.user.loan_type == 'Variable' and metrics_calculation.user.variable_loan_type == 'Interest Only':
-            assert metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
+        elif suburb_performance_statistics.user.loan_type == 'Variable' and suburb_performance_statistics.user.variable_loan_type == 'Interest Only':
+            assert suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 1.82, 
         '10yr Appreciation': 60}
         else:
-            metrics_calculation.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
+            suburb_performance_statistics.data[0] == {'Listing Date': '2022-07-05', 'Property Type': 'Apartment', 'Suburb': 'Hurstville', 'State': 'NSW',
         'Postcode': '2220', 'Address': '94 Queens Road, Hurstville', 'Land Area': 'N/A', 'Price': 715.00,
         'Url': 'https://www.domain.com.au/94-queens-road-hurstville-nsw-2220-15970998', 'Mortgage Repayments': 24.76, 
         '10yr Appreciation': 60}
@@ -765,15 +752,15 @@ def renter_customer_email(residential_listings_search_renter, residential_listin
     return customer_email
 
 @pytest.fixture
-def investor_customer_email(metrics_calculation_api_calls_house_investor_variable_rate_principal_and_interest):
-    metrics_calculation_api_calls_house_investor_variable_rate_principal_and_interest.calculate_investor_metrics(0, 'House')
-    customer_email = CustomerEmail(metrics_calculation = metrics_calculation_api_calls_house_investor_variable_rate_principal_and_interest)
+def investor_customer_email(suburb_performance_statistics_api_calls_house_investor_variable_rate_principal_and_interest):
+    suburb_performance_statistics_api_calls_house_investor_variable_rate_principal_and_interest.calculate_investor_metrics(0, 'House')
+    customer_email = CustomerEmail(suburb_performance_statistics = suburb_performance_statistics_api_calls_house_investor_variable_rate_principal_and_interest)
     return customer_email
 
 @pytest.fixture
-def owner_occupier_customer_email(metrics_calculation_api_calls_house_owner_occupier_variable_rate_principal_and_interest):
-    metrics_calculation_api_calls_house_owner_occupier_variable_rate_principal_and_interest.calculate_owner_occupier_metrics(0, 'House')
-    customer_email = CustomerEmail(metrics_calculation = metrics_calculation_api_calls_house_owner_occupier_variable_rate_principal_and_interest)
+def owner_occupier_customer_email(suburb_performance_statistics_api_calls_house_owner_occupier_variable_rate_principal_and_interest):
+    suburb_performance_statistics_api_calls_house_owner_occupier_variable_rate_principal_and_interest.calculate_owner_occupier_metrics(0, 'House')
+    customer_email = CustomerEmail(suburb_performance_statistics = suburb_performance_statistics_api_calls_house_owner_occupier_variable_rate_principal_and_interest)
     return customer_email
 
 class TestCustomerEmail:

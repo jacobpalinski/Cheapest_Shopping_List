@@ -95,16 +95,16 @@ class OwnerOccupier(Investor,User):
                 self.mortgage_interest = owner_occupier_rate_information[('variable-IO','>80')]
 
 class APIClient:
-    CLIENT_ID = os.environ.get('CLIENT_ID')
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    CLIENT_ID = str(os.environ.get('CLIENT_ID'))
+    SECRET_KEY = str(os.environ.get('SECRET_KEY'))
     SCOPE = ['api_listings_read api_suburbperformance_read']
 
     def generate_token(self):
         response = requests.post(f'https://auth.domain.com.au/v1/connect/token', {'client_id': APIClient.CLIENT_ID,
-        'client_secret': APIClient.CLIENT_ID, 
+        'client_secret': APIClient.SECRET_KEY, 
         'grant_type': 'client_credentials',
         'scope': APIClient.SCOPE,
-        'Content-Type': 'text/json'})
+        'Content-Type': 'application/json'})
         self.access_token = {'Authorization': 'Bearer ' + response.json()['access_token']}
 
 # Retrieves all listing data from POST /v1/listings/residential/_search/ for each location in json format
@@ -116,31 +116,31 @@ class ResidentialListingsSearch:
     
     def listings_request(self):
         for location in self.user.locations:
-            for suburb, state, postcode in location:
-                listings = requests.post('https://api.domain.com.au/v1/listings/residential/_search', json = {
-                    'listingType': 'Rent' if isinstance(self.user, Renter) else 'Sale',
-                    'propertyTypes': self.user.property_types,
-                    'minBedrooms': self.user.bedrooms,
-                    'minBathrooms': self.user.bathrooms,
-                    'minCarspaces': self.user.car_spaces,
-                    'minPrice': self.user.min_price,
-                    'maxPrice': self.user.max_price,
-                    'locations': [
-                        {
-                            'state': state,
-                            'region': '',
-                            'area': '',
-                            'suburb': suburb,
-                            'postcode': postcode,
-                            'includeSurroundingSuburbs': False        
-                        }
-                    ],
-                    'excludePriceWithheld': False,
-                    'excludeDepositTaken': True,
-                    'pageSize': 50,
-                    'listedSince': f'{self.user.date_posted}'}, headers = self.api_client.access_token)
-                
-                self.responses.append(listings.json())
+            suburb, state, postcode = location
+            listings = requests.post('https://api.domain.com.au/v1/listings/residential/_search', json = {
+                'listingType': 'Rent' if isinstance(self.user, Renter) else 'Sale',
+                'propertyTypes': self.user.property_types,
+                'minBedrooms': self.user.bedrooms,
+                'minBathrooms': self.user.bathrooms,
+                'minCarspaces': self.user.car_spaces,
+                'minPrice': self.user.min_price,
+                'maxPrice': self.user.max_price,
+                'locations': [
+                    {
+                        'state': state,
+                        'region': '',
+                        'area': '',
+                        'suburb': suburb,
+                        'postcode': postcode,
+                        'includeSurroundingSuburbs': False        
+                    }
+                ],
+                'excludePriceWithheld': False,
+                'excludeDepositTaken': True,
+                'pageSize': 50,
+                'listedSince': f'{self.user.date_posted}'}, headers = self.api_client.access_token)
+            
+            self.responses.append(listings.json())
 
 # Stores and retrieves property listing data from Residential_Listings_Search
 class PropertyData:
@@ -183,7 +183,7 @@ class PropertyData:
             elif property['Price'] < 1000:
                 property['Price'] = property['Price'] * 1000  # for display prices that contained thousands symbol with number eg. 539K
 
-# Retrieves performance statistics for houses and apartments from GET /v2/suburbPerformanceStatistics/{state}/{suburb}/{postcode}/ for calculations to be performed for Investors and Owner Occupiers
+# Retrieves performance statistics for houses and apartments from GET /v2/suburbPerformanceStatistics/{state}/{suburb}/{postcode}/ and calculates statistics for Investors and Owner Occupiers
 class SuburbPerformanceStatistics:
     def __init__(self,user, api_client, property_data):
         self.user = user
@@ -225,13 +225,6 @@ class SuburbPerformanceStatistics:
         appreciation_10yr = round(100.00 * (median_sale_20212022 - median_sale_20112012) / median_sale_20112012, 2)
         self.api_calls_made[('Apartment',self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])] = [appreciation_1yr,
         appreciation_5yr, appreciation_10yr, median_annual_rent]
-
-# Calculation of mortgage repayments and metrics for investors and owner occupiers
-class MetricsCalculation:
-    def __init__(self, suburb_performance_statistics):
-        self.user = suburb_performance_statistics.user
-        self.data = suburb_performance_statistics.data
-        self.suburb_performance_statistics_api_calls = suburb_performance_statistics.api_calls_made
     
     def calculate_investor_metrics(self, index, property_category):
         monthly_decimal_rate = (self.user.mortgage_interest / 100) / 12
@@ -240,13 +233,13 @@ class MetricsCalculation:
         else:
             self.data[index]['Mortgage Repayments'] = round(self.data[index]['Price'] * (self.user.lvr / 100) * ((monthly_decimal_rate * (1 + monthly_decimal_rate)**(12 * self.user.loan_term)) / ((1 + monthly_decimal_rate)**(12 * self.user.loan_term) - 1)), 2)
             
-        self.data[index]['Rental Income'] = round(365 * ((self.suburb_performance_statistics_api_calls[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][3]) / 7) / 12, 2)
+        self.data[index]['Rental Income'] = round(365 * ((self.api_calls_made[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][3]) / 7) / 12, 2)
         self.data[index]['Operating Expenses'] = round(0.50 * self.data[index]['Rental Income'],2) # 50% rule for calculating operating expenses
         self.data[index]['Cash Flow'] = round(self.data[index]['Rental Income'] - self.data[index]['Mortgage Repayments'] - self.data[index]['Operating Expenses'], 2)
         self.data[index]['Cash on Cash Return'] = round((self.data[index]['Cash Flow'] * 12 / ((1 - (self.user.lvr / 100.00)) * self.data[index]['Price'])), 2)
-        self.data[index]['1yr Appreciation'] = self.suburb_performance_statistics_api_calls[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][0]
-        self.data[index]['5yr Appreciation'] = self.suburb_performance_statistics_api_calls[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][1]
-        self.data[index]['10yr Appreciation'] = self.suburb_performance_statistics_api_calls[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][2]
+        self.data[index]['1yr Appreciation'] = self.api_calls_made[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][0]
+        self.data[index]['5yr Appreciation'] = self.api_calls_made[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][1]
+        self.data[index]['10yr Appreciation'] = self.api_calls_made[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][2]
 
     def calculate_owner_occupier_metrics(self, index, property_category):
         monthly_decimal_rate = (self.user.mortgage_interest / 100) / 12
@@ -255,14 +248,14 @@ class MetricsCalculation:
         else:
             self.data[index]['Mortgage Repayments'] = round(self.data[index]['Price'] * (self.user.lvr / 100) * ((monthly_decimal_rate * (1 + monthly_decimal_rate)**(12 * self.user.loan_term)) / ((1 + monthly_decimal_rate)**(12 * self.user.loan_term) - 1)), 2)
         
-        self.data[index]['10yr Appreciation'] = self.suburb_performance_statistics_api_calls[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][2]
+        self.data[index]['10yr Appreciation'] = self.api_calls_made[(property_category,self.data[index]['Suburb'],self.data[index]['State'],self.data[index]['Postcode'])][2]
 
 class CustomerEmail:
-    def __init__(self, property_data = None, metrics_calculation = None, email_address = None, password = None): # Email + Password from session data in flask application
-        if metrics_calculation != None:
-            self.user = metrics_calculation.user
-            self.data = metrics_calculation.data
-        else:
+    def __init__(self, property_data = None, suburb_performance_statistics = None, email_address = None, password = None): # Email + Password from session data in flask application
+        if suburb_performance_statistics != None:
+            self.user = suburb_performance_statistics.user
+            self.data = suburb_performance_statistics.data
+        elif property_data != None:
             self.user = property_data.residential_listings_search.user
             self.data = property_data.data
         self.email_address = email_address 
@@ -301,8 +294,10 @@ class CustomerEmail:
         message['To'] = self.email_address
         suburb_set = {location[0] for location in self.user.locations} # Extracts suburb from each location tuple in self.user.locations
         suburb_string = ','.join(suburb_set)
-        message['Subject'] = f'{"Investment Properties" if isinstance(self.user,Investor()) else "Properties for Sale"} in {suburb_string} last updated {self.user.date_posted}'
-        body= f'{self.user.bedrooms} bedroom, {self.user.bathrooms} bathroom, {self.user.car_spaces} car space {", ".join("Apartments" if property_type == "ApartmentUnitFlat" else property_type + "s" for property_type in self.user.property_types).lower()} in {suburb_string}, priced between ${self.user.min_price} and ${self.user.max_price}, earliest posting date {self.user.date_posted}. Key metrics calculated for {self.user.loan_type.lower()} rate {self.user.variable_loan_type.lower() if self.variable_loan_type != "None" else ""} loan with an LVR of {self.user.lvr} for {self.user.loan_term} years with {self.user.mortgage_interest}% interest p.a.'
+        print(self.user.variable_loan_type)
+        print(type(self.user.variable_loan_type))
+        message['Subject'] = f'{"Properties for Sale" if isinstance(self.user, OwnerOccupier) else "Investment Properties"} in {suburb_string} last updated {self.user.date_posted}'
+        body= f'{self.user.bedrooms} bedroom, {self.user.bathrooms} bathroom, {self.user.car_spaces} car space {", ".join("Apartments" if property_type == "ApartmentUnitFlat" else property_type + "s" for property_type in self.user.property_types).lower()} in {suburb_string}, priced between ${self.user.min_price} and ${self.user.max_price}, earliest posting date {self.user.date_posted}. Key metrics calculated for {self.user.loan_type} Rate {self.user.variable_loan_type if self.user.variable_loan_type != "None" else ""} Loan with an LVR of {self.user.lvr} for {self.user.loan_term} years with a {self.user.mortgage_interest}% interest rate p.a.'.replace("Rate  Loan", "Rate Loan")
         message.attach(MIMEText(body, "plain"))
         message.attach(MIMEApplication(self.data_io.getvalue(), Name = 'property_data.csv'))
         with smtplib.SMTP(smtp_server,self.port) as server:
