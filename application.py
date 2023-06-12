@@ -67,7 +67,7 @@ RenterForm.next = SubmitField('Submit')
 
 @application.route('/')
 def default():
-    return redirect(url_for('initial'))
+    return redirect(url_for('initial_page'))
 
 @application.route('/initial', methods = ['GET', 'POST'])
 def initial_page():
