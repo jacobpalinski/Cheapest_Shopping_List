@@ -247,4 +247,4 @@ def thankyou():
     return render_template('thankyou.html')
 
 if __name__ == "__main__":
-    application.run(port = 5000)
+    application.run()
