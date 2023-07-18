@@ -33,7 +33,6 @@ py==1.11.0
 py3-validate-email==1.0.5
 pycparser==2.21
 pyparsing==3.0.9
-pypiwin32==223
 PySocks==1.7.1
 pytest==7.1.2
 pytest-flask==1.2.0
@@ -42,7 +41,6 @@ pytest-mock==3.8.2
 python-dateutil==2.8.2
 python-dotenv==1.0.0
 pytz==2023.3
-pywin32==305
 PyYAML==5.4.1
 regex==2022.7.25
 requests==2.26.0
